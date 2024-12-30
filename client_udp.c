@@ -1,15 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 
-#include <stdlib.h>
-#include <string.h>
-
 #define BUFFER_SIZE 100 // Taille maximale du message à envoyer
 #define PORT 9600       // Port d'écoute du serveur
+
 
 int main(int argc, char *argv[]) {
     /*
