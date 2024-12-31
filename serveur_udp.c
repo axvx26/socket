@@ -1,3 +1,12 @@
+/*
+*                                                                   .___ *
+*   ______  ____  _______ ___  __  ____   __ __ _______   __ __   __| _/______ *
+*  /  ___/_/ __ \ \_  __ \\  \/ /_/ __ \ |  |  \\_  __ \ |  |  \ / __ | \____ \ *
+*  \___ \ \  ___/  |  | \/ \   / \  ___/ |  |  / |  | \/ |  |  // /_/ | |  |_> > *
+* /____  > \___  > |__|     \_/   \___  >|____/  |__|    |____/ \____ | |   __/ *
+*      \/      \/                     \/                             \/ |__| *
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -8,8 +17,9 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-#define BUFFER_SIZE 100  // Taille maximale du message à recevoir
-#define PORT 9600        // Port d'écoute du serveur
+// Définition des constantes
+#define BUFFER_SIZE 100  // taille max du message
+#define PORT 9600        // port d'écoute du serveur
 
 void run_tcpdump_in_background() {
     pid_t pid = fork();
@@ -30,13 +40,14 @@ void run_tcpdump_in_background() {
     printf("tcpdump lancé en arrière-plan (PID : %d).\n", pid);
 }
 
+// MAIN
 int main(int argc, char *argv[]) {
     int sockfd;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_len = sizeof(client_addr);
     char buffer[BUFFER_SIZE];
 
-    // Vérifier si l'option -d (debug) est activée
+    // Vérifier si l'option -d (developer) est activée
     int debug_mode = 0;
     if (argc > 1 && strcmp(argv[1], "-d") == 0) {
         debug_mode = 1;

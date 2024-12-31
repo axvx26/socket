@@ -1,3 +1,11 @@
+/*
+*         .__   .__                   __      __ *
+*   ____  |  |  |__|  ____    ____  _/  |_  _/  |_   ____  ______ *
+* _/ ___\ |  |  |  |_/ __ \  /    \ \   __\ \   __\_/ ___\ \____ \ *
+* \  \___ |  |__|  |\  ___/ |   |  \ |  |    |  |  \  \___ |  |_> > *
+*  \___  >|____/|__| \___  >|___|  / |__|    |__|   \___  >|   __/ *
+*      \/                \/      \/                     \/ |__| *
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -9,17 +17,19 @@
 #include <signal.h>
 #include <errno.h>
 
-#define BUFFER_SIZE 100
-#define PORT 9600
-#define MAX_RETRIES 3
-#define RETRY_DELAY 3 // secondes
+// Définition des constantes
+#define BUFFER_SIZE 100     // taille max du message
+#define PORT 9600           // numéro de port d'écoute
+#define MAX_RETRIES 3       // tentatives de connexion
+#define RETRY_DELAY 3       // délai en secondes
 
 int sockfd;
 int dev_mode = 0;
 
+// Fonction qui gère la déconnexion client
 void handle_exit(int sig) {
     const char *disconnect_message = "DISCONNECT";
-    // On essaye d’envoyer un message de déconnexion si le socket est encore valide
+    // Si le socket est encore valide, on envoie un message de déconnexion au serveur
     if (sockfd >= 0) {
         write(sockfd, disconnect_message, strlen(disconnect_message));
         printf("\nMessage de déconnexion envoyé au serveur. Déconnexion...\n");
@@ -29,6 +39,7 @@ void handle_exit(int sig) {
     exit(0);
 }
 
+// MAIN
 int main(int argc, char *argv[]) {
     struct sockaddr_in server_addr;
     struct hostent *server;
@@ -148,26 +159,24 @@ int main(int argc, char *argv[]) {
         char read_buf[10];
         n = read(sockfd, read_buf, sizeof(read_buf));
         if (n == 0) {
-            // => le serveur a fermé la connexion
+            // le serveur a fermé la connexion
             printf("\nLe serveur a fermé la connexion.\n");
             close(sockfd);
             exit(EXIT_SUCCESS);
         } else if (n < 0) {
-            // -1 => soit rien à lire (EAGAIN/EWOULDBLOCK), soit un vrai pb
-            if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                // Pas de données pour le moment => normal
+            // -1 => soit rien à lire, soit un vrai pb
+            if (errno == EAGAIN || errno == EWOULDBLOCK) { // condition logique inversée volontairement
+                // Pas de données pour le moment = normal
             } else {
-                // Autre erreur => probablement une déconnexion
+                // Autre erreur = probablement une déconnexion
                 perror("Erreur read (serveur déconnecté ?)");
                 close(sockfd);
                 exit(EXIT_FAILURE);
             }
         }
-        // Si n > 0, c’est que le serveur a répondu quelque chose, qu’on
-        // peut afficher ou ignorer. (Ici, on ignore.)
+        // Si n > 0, c’est que le serveur a répondu quelque chose, qu’on ignore.
     }
-
-    // En principe, on n’atteint jamais cette ligne
-    close(sockfd);
+    
+    close(sockfd); // selon le principe TCP, on n'atteint jamais cette ligne
     return 0;
 }

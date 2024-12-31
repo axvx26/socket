@@ -1,3 +1,12 @@
+/*
+*         .__   .__                   __               .___ *
+*   ____  |  |  |__|  ____    ____  _/  |_   __ __   __| _/______ *
+* _/ ___\ |  |  |  |_/ __ \  /    \ \   __\ |  |  \ / __ | \____ \ *
+* \  \___ |  |__|  |\  ___/ |   |  \ |  |   |  |  // /_/ | |  |_> > *
+*  \___  >|____/|__| \___  >|___|  / |__|   |____/ \____ | |   __/ *
+*      \/                \/      \/                     \/ |__| *
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,8 +16,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-#define BUFFER_SIZE 100 // Taille maximale du message à envoyer
-#define PORT 9600       // Port d'écoute du serveur
+// Définition des constantes
+#define BUFFER_SIZE 100 // taille maximale du message à envoyer
+#define PORT 9600       // port d'écoute du serveur
 
 
 int main(int argc, char *argv[]) {
