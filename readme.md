@@ -35,9 +35,9 @@ avec les protocoles de communication TCP et UDP.
 ### Launcher
 
 L'exécution du launcher propose à l'utilisateur les choix suivants:
-1- le protocole (TCP ou UDP)
-2- le rôle (client ou serveur)
-3- le mode développeur pour du debugage.
+1. le protocole (TCP ou UDP)
+2. le rôle (client ou serveur)
+3. le mode développeur pour du debugage.
 
 ### Serveur tcp (serveur_tcp.c)
 
