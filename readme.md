@@ -4,8 +4,11 @@
 
 - VO Alexis : alexis.vo@etu-upsaclay.fr
 - GERVINET Théo : theo.gervinet@etu-upsaclay.fr
-  
 
+## Répartition du travail
+
+Le travail a été effectué en parallèle par les deux membres du binôme pour une répartition égale.
+  
 ## Liste des fichiers
 
 - client_udp.c
@@ -15,16 +18,26 @@
 - main.c
 - makefile
 
-## Répartition du travail
+### Exécutables
 
-Le travail a été effectué en parallèle par les deux membres du binôme pour une répartition égale.
+Le makefile permet de générer les différents exécutables suivant:
+- launcher
+- serveur_tcp
+- client_tcp
+- client_udp
+- serveur_udp
 
 ## Fonctionnalités
 
-Les fichiers listés ci-dessus permettent la communication entre deux processus sur la base du modèle client/serveur,
-avec les protocoles de communication TCP et UDP. Les codes respectent les schémas de la structure client/serveur selon le protocole.
-Un makefile permet de générer les différents exécutables ainsi qu'un launcher. L'exécution du launcher propose à l'utilisateur de choisir
-le protocole puis le rôle (client ou serveur) voulu avant d'exécuter le code adapté. Il propose également un mode développeur pour du debugage.
+Les fichiers listés ci-dessus permettent de générer les exécutables gérant la communication entre deux processus basés sur le modèle client/serveur,
+avec les protocoles de communication TCP et UDP.
+
+### Launcher
+
+L'exécution du launcher propose à l'utilisateur les choix suivants:
+1- le protocole (TCP ou UDP)
+2- le rôle (client ou serveur)
+3- le mode développeur pour du debugage.
 
 ### Serveur tcp (serveur_tcp.c)
 
