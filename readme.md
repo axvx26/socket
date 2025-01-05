@@ -37,7 +37,7 @@ avec les protocoles de communication TCP et UDP.
 L'exécution du launcher propose à l'utilisateur les choix suivants:
 1. le protocole (TCP ou UDP)
 2. le rôle (client ou serveur)
-3. le mode développeur pour du debugage.
+3. le mode développeur pour du debugage (seulement disponible avec TCP).
 
 NB : il reste tout à fait possible de compiler et exécuter les codes séparément, sans utiliser le launcher.
 
@@ -59,21 +59,19 @@ Ctrl+C
 
 ### Serveur udp (serveur_udp.c)
 
-Le programme du serveur udp écoute sur un port donné (par défaut 9600) et affiche les messages reçus. Il inclut une option en mode développeur pour exécuter tcpdump en arrière-plan afin de capturer et afficher le trafic réseau sur ce port. Il suit le schéma du TP.
-
-NB: on exécute tcpdump avec sudo pour avoir les droits nécessaires donc un mot de passe est requis.
+Le programme du serveur udp écoute sur un port donné (par défaut 9600) et affiche les messages reçus. Il suit le schéma du protocole UDP.
 
 ### Client udp (client_udp.c)
 
-Le programme du client udp fonctionne selon le principe classique du protocole, en suivant le schéma du TP. Il lit les messages de l'utilisateur et les envoie au serveur.
+Le programme du client udp fonctionne selon le principe classique du protocole, en suivant le schéma du protocole UDP. Il lit les messages de l'utilisateur et les envoie au serveur.
 
 ## Exemple
 
-L'exemple suivant illustre une communication TCP en mode développeur. L'utilisateur peut également tester le protocole UDP et les options comme SHUTDOWN ou CLEAR.
-Le code fonctionne également pour une communication entre deux machines distinctes du même réseau (en s'assurant d'avoir le compilateur ```gcc``` d'installé).
+L'exemple suivant illustre une communication TCP en mode développeur. L'utilisateur peut également tester le protocole UDP et les options comme SHUTDOWN ou CLEAR (seulement sur TCP).
+Le code fonctionne également pour une communication entre deux machines distinctes du même réseau.
 
 1) Ouvrir un terminal dans le répertoire contenant les fichiers à compiler et exécuter
-2) Saisir ```make``` ; si tout se passe bien, le message suivant s'affiche dans le terminal :
+2) Ecrire ```make``` ; si tout se passe bien, le message suivant s'affiche dans le terminal :
 ```
 gcc -Wall -O2 client_tcp.c -o client_tcp
 gcc -Wall -O2 serveur_tcp.c -o serveur_tcp
@@ -81,7 +79,7 @@ gcc -Wall -O2 client_udp.c -o client_udp
 gcc -Wall -O2 serveur_udp.c -o serveur_udp
 gcc -Wall -O2 main.c -o launcher
 ```
-3) Saisir ```./launcher```.
+3) Ecrire ```./launcher```.
 ```
 === Choix du protocole ===
 1. TCP

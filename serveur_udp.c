@@ -21,24 +21,6 @@
 #define BUFFER_SIZE 100  // taille max du message
 #define PORT 9600        // port d'écoute du serveur
 
-void run_tcpdump_in_background() {
-    pid_t pid = fork();
-    if (pid == 0) {
-        // Processus enfant : exécuter tcpdump
-        char *cmd[] = {"sudo", "tcpdump", "-i", "lo0", "port", "9600", NULL};
-        execvp(cmd[0], cmd);
-
-        // Si execvp échoue
-        perror("Erreur lors de l'exécution de tcpdump");
-        exit(EXIT_FAILURE);
-    } else if (pid < 0) {
-        perror("Erreur lors de la création du processus pour tcpdump");
-        exit(EXIT_FAILURE);
-    }
-
-    // Processus parent : continuer le serveur
-    printf("tcpdump lancé en arrière-plan (PID : %d).\n", pid);
-}
 
 // MAIN
 int main(int argc, char *argv[]) {
@@ -46,16 +28,6 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_len = sizeof(client_addr);
     char buffer[BUFFER_SIZE];
-
-    // Vérifier si l'option -d (developer) est activée
-    int debug_mode = 0;
-    if (argc > 1 && strcmp(argv[1], "-d") == 0) {
-        debug_mode = 1;
-    }
-
-    if (debug_mode) {
-        run_tcpdump_in_background();
-    }
 
     // Création du socket
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
